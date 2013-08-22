@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  h1= title
+  #content
+  p Fill the form
+  form( method = "post", action = '/babyCreate')
+    key Name
+        input( type = "text", name = "babyName" )
+        br
+    key Parents (Madre y Padre, ex: Hellen y Adrian)
+        input( type = "text", name = "parents" )
+        br
+    key Expected Date
+        input( type = "date", name = "expectedDate" )
+        br
+    input( type = "submit", value = "Enviar" );

@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  h1= title
+  #content
+  p Hiciste la siguiente apuesta:
+  ul
+    li= baby.babyName + " - " + moment.utc( date ).format( "DD MMMM YYYY" )
+  p Buena Suerte !

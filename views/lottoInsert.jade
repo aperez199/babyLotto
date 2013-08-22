@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  h1= title
+  #content
+  p Ingresa la fecha de nacimiento
+  form( method = "post", action = '/lottoCreate')
+    key Bebe
+        br
+        select( name = "baby" )
+            for item in babies
+                option( value = item._id ) #{item.babyName}
+        br
+    key Fecha
+        br
+        input( type = "date", name = "selectedDate" )
+        br
+    input( type = "submit", value = "Guardar" );

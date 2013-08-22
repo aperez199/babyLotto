@@ -1,0 +1,26 @@
+block content
+  h1= title
+  p Welcome to #{title}
+  | Welcome to my Ajax Experimento!
+  br
+  br
+  script(type='text/javascript')
+    $(document).ready(function() {
+      $('#user').keypress(function() {
+        $.ajax({
+          type: 'GET',
+          url: '/ajax'
+        }).done(function(result) {
+          console.log($('#user').val().length);
+          $('#out').val($('#user').val() + ' is ' + result.text);
+        });
+      });
+    });
+
+  form(name='myForm')
+    label Name: 
+      input(type='text', name='username', id='user')
+    br
+    label Output:
+      input(type='text', name='output', id='out')
+    input( type = "submit", value = "Submit" );

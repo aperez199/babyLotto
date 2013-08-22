@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  h1= title
+  #content
+  p Fill the form
+  form( method = "post", action = '/userCreate')
+    key Username
+        input( type = "text", name = "username" )
+        <br/>
+    key Password
+        input( type = "text", name = "password" )
+        <br/>
+    key Email
+        input( type = "text", name = "email" )
+        <br/>
+    input( type = "submit", value = "Submit" );

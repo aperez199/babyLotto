@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  h1= title
+  #content
+  p Ingresar:
+  form( method = "post", action = '/login') 
+    Key Username
+        input( type = "text", name = "username" )
+    br
+    Key Password
+        input( type = "password", name = "password" )
+    br
+    input( type = "submit", value = "Entrar" )
