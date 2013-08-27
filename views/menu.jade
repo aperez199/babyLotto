@@ -1,6 +1,7 @@
 extends layout
 
 block content
+  img( src = '/public/images/logo.png' )
   h1 Bienvenido a Baby Lotto
   #content
   br
@@ -13,4 +14,4 @@ block content
   a( href = '/rules' ) Reglamento de las apuestas
   br
   br
-  a( href = '/logout' ) Salir
+  a( href = '/logout', type = 'button' ) Salir

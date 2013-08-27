@@ -24,13 +24,15 @@ exports.login = function( req, res ) {
     userData.login( req.body.username, function( err, user ) {
         if( err ) console.log( err );
         else {
-            if( req.body.password == user.password ) {
+            console.log( "type: " + typeof( user ));
+            if( typeof( user ) === 'undefined' ) {
+                res.render( 'badLogin' );
+            }
+            else if( req.body.password == user.password ) {
                 req.session.user_id = user._id;
                 res.render( 'menu' );
             } else {
-                res.render( 'badLogin', {
-                    title: 'Error'
-                });
+                res.render( 'badLogin' );
             }
         }
     });

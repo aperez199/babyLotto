@@ -1,6 +1,10 @@
-var mongoose = require('mongoose');
+var mongoose = require( 'mongoose' );
 
-exports.list = function list(callback) {
+String.prototype.capitalize = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+};
+
+exports.list = function list( callback ) {
     var User = mongoose.model('User');
     User.find({}, function (err, users) {
         if(err){
@@ -9,8 +13,8 @@ exports.list = function list(callback) {
             console.log("users: " + users);
             callback("",users);
         }
-    })
-}
+    });
+};
 
 exports.insert = function(callback) {
     var User = mongoose.model('User');
@@ -34,7 +38,7 @@ exports.create = function( req, callback ) {
     newUser.save( function( err ) {
         if( err ) console.log( err );
         else {
-            console.log( 'New user ' + newUser.username + ' saved in the db' );
+            console.log( 'New user ' + newUser.username + ' saved in the db' );            
             callback( "", newUser );
         }
     });
@@ -42,11 +46,17 @@ exports.create = function( req, callback ) {
 
 exports.login = function( username, callback ) {
     var User = mongoose.model( 'User' );
-    User.findOne( { username: username }, function( err, user ) {
+    User.findOne( { username: username.capitalize() }, function( err, user ) {
         if( err ) console.log( err );
         else {
-            console.log( 'Username ' + username + ' found. Password sent' );
-            callback( "", user );
+            if( !user ) {
+                console.log('User ' + username + ' not found' );
+                callback( "", undefined );
+            }
+            else {
+                console.log( 'Username ' + username + ' found. Password sent' );
+                callback( "", user );
+            }
         }
-    })
-}
+    });
+};
