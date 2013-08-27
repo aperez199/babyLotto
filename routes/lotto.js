@@ -1,14 +1,31 @@
 var lottoData = require( '../model/lottos' );
 var babyData = require( '../model/babies' );
+var userData = require( '../model/users' );
 var moment = require( 'moment' );
 
-exports.list = function(req, res){
-    lottoData.list( function( err, list ) {
-        res.render( 'lotto', {
-            title: 'Lotto',
-            pagetitle: 'Hello there',
-            lotto: list
-        } );
+exports.index = function(req, res){
+    lottoData.list( function( err, lottoList ) {
+        var babies = {};
+        var users = {};
+        babyData.list( function( err, babyList ) {
+            for( var baby in babyList ) {
+                babies[babyList[baby]._id] = babyList[baby].babyName;
+            }
+            userData.list( function( err, userList ) {
+                for( var user in userList ) {
+                    users[userList[user]._id] = userList[user].username;
+                }
+                res.render( 'lottos', {
+                    title: 'Lotto',
+                    pagetitle: 'Hello there',
+                    lottos: lottoList,
+                    moment: moment,
+                    babies: babies,
+                    users: users
+                } );
+            });
+        
+        });
     } );
 };
 
@@ -26,19 +43,25 @@ exports.insert = function( req, res ) {
 
 exports.create = function( req, res ) {
     lottoData.create( req, function( err, newLotto ) {
-        if( err ) console.log( err );
-        else {
-                console.log( 'BabyId: ' + newLotto._babyId );
-                console.log( 'expectedDate: ' + newLotto.date );
-                console.log( 'username: ' + newLotto._userId );
+        console.log( "type: " + typeof( newLotto._babyId ) );
+        if( typeof( newLotto._babyId ) === 'undefined' ) {
+            console.log( "ERROR: " + newLotto );
+            res.render( 'lottoError', {} );
+        } else {
                 babyData.get( newLotto._babyId, function( err, baby ) {
-                    res.render( 'lottoInserted', {
-                        title: 'Nueva Apuesta',
-                        pagetitle: 'Hello there',
-                        date: newLotto.date,
-                        baby: baby,
-                        moment: moment
-                });
+                    if( err ) console.log( err );
+                    else {
+                        console.log( 'BabyId: ' + newLotto._babyId );
+                        console.log( 'expectedDate: ' + newLotto.date );
+                        console.log( 'username: ' + newLotto._userId );
+                        res.render( 'lottoInserted', {
+                            title: 'Nueva Apuesta',
+                            pagetitle: 'Hello there',
+                            date: newLotto.date,
+                            baby: baby,
+                            moment: moment
+                        });
+                    }
             });
         }
     });

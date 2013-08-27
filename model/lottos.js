@@ -2,12 +2,12 @@ var mongoose = require('mongoose');
 
 exports.list = function list(callback) {
     var Lotto = mongoose.model('Lotto');
-    Lotto.find({}, function (err, lottos) {
-        if(err){
-            console.log(err);
+    Lotto.find( {}, null, {sort: { '_babyId': -1 }}, function (err, lottos) {
+        if( err ){
+            console.log( err );
         } else {
-            console.log("lottos: " + lottos);
-            callback("",lottos);
+            console.log( "lottos: " + lottos );
+            callback( "",lottos );
         }
     })
 }
@@ -32,7 +32,9 @@ exports.create = function( req, callback ) {
             }
             lotto.date = req.body.selectedDate;
             lotto.save( function( err ) {
-                if( err ) console.log( err );
+                if( err ) {
+                    callback( "", err );
+                }
                 else {
                     console.log( 'New lotto for baby ' + newLotto._babyId + ' by user ' + newLotto._userId );
                     callback( "", lotto );

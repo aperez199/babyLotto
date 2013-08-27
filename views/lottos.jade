@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  img( src = '/public/images/logo.png' )
+  h1 Apuestas
+  #content
+  p Las apuestas hechas hasta el momento son:
+  table( border = "1" )
+    tr
+        th( width = "33%" ) Bebé
+        th( width = "33%" ) Usuario
+        th( width = "33%" ) Fecha
+    for lotto in lottos
+        tr
+            td= babies[lotto._babyId]
+            td= users[lotto._userId]
+            td= moment.utc( lotto.date ).format( "DD MMMM YYYY" )
+  br
+  a( href = '/' ) Volver

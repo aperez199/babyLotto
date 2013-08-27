@@ -46,7 +46,7 @@ app.get( '/babies', baby.index );
 app.get( '/bet', lotto.insert );
 app.get( '/rules', static.rules );
 app.get( '/winners', static.winners );
-//app.get( '/lottos', lotto.index );
+app.get( '/lottos', lotto.index );
 
 // POST
 app.post( '/login', index.login );
