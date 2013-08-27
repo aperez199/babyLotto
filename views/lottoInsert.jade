@@ -1,11 +1,15 @@
 extends layout
 
 block content
-  h1= title
+  img( src = '/public/images/logo.png' )
+  h1 Ingresa tu pronóstico
   #content
   p Ingresa la fecha de nacimiento
+  b Importante: 
+  p Esta nueva fecha reemplazará cualquier otra fecha que hayas ingresado para el mismo bebé
+  br
   form( method = "post", action = '/lottoCreate')
-    key Bebe
+    key Bebé
         br
         select( name = "baby" )
             for item in babies
@@ -16,3 +20,5 @@ block content
         input( type = "date", name = "selectedDate" )
         br
     input( type = "submit", value = "Guardar" );
+  br
+  a( href = '/' ) Volver

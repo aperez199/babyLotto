@@ -10,17 +10,18 @@ exports.list = function(req, res){
             lotto: list
         } );
     } );
-    res.send("respond with a resource");
 };
 
 exports.insert = function( req, res ) {
-    babyData.list( function( err, list ) {
-        res.render( 'lottoInsert', {
-            title: 'Ingresa tu pronóstico',
-            pagetitle: 'Hello there',
-            babies: list
+    if( req.session.user_id ) {
+        babyData.list( function( err, list ) {
+            res.render( 'lottoInsert', {
+                babies: list
+            });
         });
-    });
+    } else {
+        res.render('index', {});
+    }
 };
 
 exports.create = function( req, res ) {

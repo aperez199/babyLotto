@@ -8,9 +8,7 @@ exports.index = function( req, res ) {
     if( req.session.user_id ) {
         res.render( 'menu' );
     } else {
-        res.render('index', {
-            title: 'Baby Lotto'
-        });
+        res.render('index', {});
     }
 };
 

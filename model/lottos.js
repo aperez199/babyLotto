@@ -14,18 +14,30 @@ exports.list = function list(callback) {
 
 exports.create = function( req, callback ) {
     var Lotto = mongoose.model( 'Lotto' );
-    console.log('req baby: ' + req.body.baby );
-    console.log('req date: ' + req.body.selectedDate);
+    console.log( 'req baby: ' + req.body.baby );
+    console.log( 'req date: ' + req.body.selectedDate );
     var newLotto = new Lotto( {
         _userId: req.session.user_id, 
         _babyId: req.body.baby,
         date: req.body.selectedDate
     });
-    newLotto.save( function( err ) {
+    
+    Lotto.findOne( { _userId: newLotto._userId, _babyId: newLotto._babyId }, function( err, lotto ) {
         if( err ) console.log( err );
         else {
-            console.log( 'New lotto for ' + newLotto._userId + ' saved in the db' );
-            callback( "", newLotto );
+            if( !lotto ) {
+                lotto = new Lotto();
+                lotto._userId = req.session.user_id;
+                lotto._babyId = req.body.baby;
+            }
+            lotto.date = req.body.selectedDate;
+            lotto.save( function( err ) {
+                if( err ) console.log( err );
+                else {
+                    console.log( 'New lotto for baby ' + newLotto._babyId + ' by user ' + newLotto._userId );
+                    callback( "", lotto );
+                }
+            });
         }
     });
 };

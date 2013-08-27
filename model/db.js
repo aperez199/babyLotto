@@ -17,6 +17,10 @@ var lottoSchema = new mongoose.Schema({
     _babyId: {type : mongoose.Schema.Types.ObjectId, ref : 'Baby'},
     date: { type: Date, default: Date.now }
 });
+/*lottoSchema.virtual( 'user_baby' ).get( function () {
+    return this._userId + ' ' + this._babyId;
+});*/
+lottoSchema.index( { _babyId: 1, date: 1}, { unique: true } );
 
 mongoose.model('User', userSchema);
 mongoose.model('Baby', babySchema);
