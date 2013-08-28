@@ -26,4 +26,5 @@ mongoose.model('User', userSchema);
 mongoose.model('Baby', babySchema);
 mongoose.model('Lotto', lottoSchema);
 
-mongoose.connect( 'mongodb://127.8.20.129/babyLotto' );
+//mongoose.connect( 'mongodb://127.8.20.129/babyLotto' );
+mongoose.connect( 'mongodb://aperez199:p4ssword@paulo.mongohq.com:10058/babyLotto' );
