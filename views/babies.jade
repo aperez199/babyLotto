@@ -7,3 +7,5 @@ block content
   ul
     for baby in babies
       li= baby.babyName + " - " + baby.parents + " - " + moment.utc( baby.expectedDate ).format( "DD MMMM YYYY" )
+  br
+  a( href = '/' ) Volver
