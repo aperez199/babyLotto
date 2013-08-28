@@ -31,9 +31,17 @@ exports.index = function(req, res){
 
 exports.insert = function( req, res ) {
     if( req.session.user_id ) {
+        var browser = req.headers['user-agent'];
+        console.log( "browser: " + browser );
+        if( browser.search( "Firefox" ) > -1 || browser.search( "MSIE" ) > -1) {
+            var crappyBrowser = true;
+        }
+        if( crappyBrowser ) console.log( "Crappy browser")
+        else console.log( "Good browser" );
         babyData.list( function( err, list ) {
             res.render( 'lottoInsert', {
-                babies: list
+                babies: list,
+                crappyBrowser: crappyBrowser
             });
         });
     } else {

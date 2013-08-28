@@ -18,7 +18,6 @@ var app = express();
 
 app.use( express.cookieParser() );
 app.use( express.session( { secret: 'yourmama' } ) );
-app.use( '/public', express.static( __dirname + "/public" ) );
 
 // all environments
 app.set('port', process.env.PORT || 3000);

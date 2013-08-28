@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var moment = require( 'moment' );
 
 exports.list = function list(callback) {
     var Lotto = mongoose.model('Lotto');
@@ -16,6 +17,11 @@ exports.create = function( req, callback ) {
     var Lotto = mongoose.model( 'Lotto' );
     console.log( 'req baby: ' + req.body.baby );
     console.log( 'req date: ' + req.body.selectedDate );
+
+    var browser = req.headers['user-agent'];
+    if( browser.search( "Firefox" ) > -1 || browser.search( "MSIE" ) > -1) {
+        var crappyBrowser = true;
+    }
     var newLotto = new Lotto( {
         _userId: req.session.user_id, 
         _babyId: req.body.baby,
@@ -30,7 +36,12 @@ exports.create = function( req, callback ) {
                 lotto._userId = req.session.user_id;
                 lotto._babyId = req.body.baby;
             }
-            lotto.date = req.body.selectedDate;
+            if( crappyBrowser ) {
+                console.log( "BUG: " + moment( req.body.selectedDate + " +0000", 'MM/DD/YYYY Z' ).toISOString() );
+                lotto.date = moment( req.body.selectedDate + " +0000", 'MM/DD/YYYY Z' ).toISOString();
+            } else {
+                lotto.date = req.body.selectedDate;
+            }
             lotto.save( function( err ) {
                 if( err ) {
                     callback( "", err );

@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  img( src = '/public/images/logo.png' )
+  img( src = '/images/logo.png' )
   h1 Ingresa tu apuesta
   #content
   p Ingresa la fecha de nacimiento
@@ -16,9 +16,14 @@ block content
                 option( value = item._id ) #{item.babyName}
         br
     key Fecha
-        br
-        input( type = "date", name = "selectedDate" )
-        br
+        if( crappyBrowser )
+            br
+            input#datepicker( type = "text", name = "selectedDate" )
+            br
+        else
+            br
+            input( type = "date", name = "selectedDate" )
+            br
     input( type = "submit", value = "Guardar" );
   br
   a( href = '/' ) Volver
