@@ -1,9 +1,9 @@
 extends layout
 
 block content
-  h1= title
+  img( src = '/public/images/logo.png' )
+  h1 Bebés
   #content
-  p The babies registered till now are:
   ul
     for baby in babies
-      li= baby.babyName + " - " + moment.utc( baby.expectedDate ).format( "DD MMMM YYYY" )
+      li= baby.babyName + " - " + baby.parents + " - " + moment.utc( baby.expectedDate ).format( "DD MMMM YYYY" )

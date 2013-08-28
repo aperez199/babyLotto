@@ -3,14 +3,18 @@ var moment = require( 'moment' );
 moment.lang( 'es' );
 
 exports.index = function(req, res) {
-    babyData.list( function( err, list ) {
-        res.render( 'babies', {
-            title: 'Babies',
-            pagetitle: 'Hello there',
-            babies: list,
-            moment: moment
+    if( req.session.user_id ) {
+        babyData.list( function( err, list ) {
+            res.render( 'babies', {
+                title: 'Babies',
+                pagetitle: 'Hello there',
+                babies: list,
+                moment: moment
+            });
         });
-    });
+    } else {
+        res.redirect('/');
+    }
 };
 
 exports.insert = function( req, res ) {
