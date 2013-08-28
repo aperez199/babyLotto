@@ -38,7 +38,7 @@ exports.create = function( req, res ) {
                 "Equipo de Baby Lotto (APP)",
                 "<b>Bienvenido a Baby Lotto</b>, el lugar donde puede apostar por la fecha de nacimiento de las nuevas adiciones a la Family.<br/>" +
                 "El premio será un pisco Gran Nobel (a menos que gane la Gloria) a beber junto a los padres y los silleteros de siempre en una fecha y lugar a determinar.<br/>" + 
-                "Por favor entre a TBD para hacer sus apuestas y conocer las reglas.<br/>" +
+                "Por favor entre a http://babylotto.herokuapp.com/ para hacer sus apuestas y conocer las reglas.<br/>" +
                 "Saludos, y suerte<br/>" + 
                 "Equipo de Baby Lotto (APP)"
             );
