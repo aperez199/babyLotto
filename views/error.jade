@@ -2,5 +2,10 @@ extends layout
 
 block content
     img( src = '/images/logo.png' )
-    p Corta el webeo Raton rql !
+    if user == "Daniel"
+        p Corta el webeo Raton rql !
+    else if user == "Hellen"
+        p Bella hermosa, tiene que poner una fecha
+    else
+        p No sea hueon(a) e ingrese una fecha
     a( href = '/' ) Volver

@@ -51,7 +51,8 @@ exports.insert = function( req, res ) {
 
 exports.create = function( req, res ) {
     if( req.body.selectedDate === '' ) {
-        res.render( 'error' );
+        res.render( 'error', { user: req.session.username } );
+        return;
     }
     lottoData.create( req, function( err, newLotto ) {
         console.log( "type: " + typeof( newLotto._babyId ) );

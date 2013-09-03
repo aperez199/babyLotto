@@ -28,6 +28,7 @@ exports.login = function( req, res ) {
             }
             else if( req.body.password == user.password ) {
                 req.session.user_id = user._id;
+                req.session.username = user.username;
                 res.render( 'menu' );
             } else {
                 res.render( 'badLogin' );
