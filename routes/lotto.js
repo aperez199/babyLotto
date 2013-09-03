@@ -50,6 +50,9 @@ exports.insert = function( req, res ) {
 };
 
 exports.create = function( req, res ) {
+    if( req.body.selectedDate === '' ) {
+        res.render( 'error' );
+    }
     lottoData.create( req, function( err, newLotto ) {
         console.log( "type: " + typeof( newLotto._babyId ) );
         if( typeof( newLotto._babyId ) === 'undefined' ) {

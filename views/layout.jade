@@ -4,14 +4,15 @@ html
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
     link( rel = 'stylesheet', href = '/stylesheets/jquery.minical.css' )
-    script( src = '/javascripts/jquery.minical.js' )
     link( rel="stylesheet", href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" )
+    block head
+    
+  body
+    block content
+    script( src = '/javascripts/jquery.minical.js' )
     script( src="http://code.jquery.com/jquery-1.9.1.js" )
     script( src="http://code.jquery.com/ui/1.10.3/jquery-ui.js" )
     script
       $(function() {
       $( "#datepicker" ).datepicker();
       });
-
-  body
-    block content
